@@ -21,14 +21,20 @@ def upload():
         file.save(filepath)
 
         text = extract_text(filepath)
+        index, chunks = create_vector_store(text)
+
+context = "\n".join(search(index, chunks, "Generate Question Paper"))
+
+paper = generate_question_paper(context)
 
         return f"""
-        <h2>PDF Uploaded Successfully</h2>
-        <p>File: {file.filename}</p>
-        <p>Total Characters: {len(text)}</p>
-        """
+<h2>Question Paper Generated</h2>
+
+<pre>{paper}</pre>
+"""
 
     return "No file selected"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True)from generator import generate_question_paper
+from rag import create_vector_store, search
