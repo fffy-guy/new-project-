@@ -9,3 +9,5 @@ python-multipart
 Flask==3.0.3
 sentence-transformers
 python-dotenv
+numpy
+Flask
