@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import os
+from pdf_utils import extract_text
 
 app = Flask(__name__)
 
