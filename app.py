@@ -19,7 +19,14 @@ def upload():
     if file:
         filepath = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
         file.save(filepath)
-        return f"PDF Uploaded Successfully: {file.filename}"
+
+        text = extract_text(filepath)
+
+        return f"""
+        <h2>PDF Uploaded Successfully</h2>
+        <p>File: {file.filename}</p>
+        <p>Total Characters: {len(text)}</p>
+        """
 
     return "No file selected"
 
